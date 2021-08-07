@@ -1,20 +1,18 @@
+import { Switch, Route } from 'react-router-dom';
+import { BooksList } from './BooksList';
+import { CreateBook } from './CreateBook';
+import { NavBar } from './layout';
+import { UpdateBook } from './UpdateBook';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavBar />
+      <Switch>
+        <Route exact path="/" component={BooksList} />
+        <Route path="create-book" component={CreateBook} />
+        <Route path="update-book" component={UpdateBook} />
+      </Switch>
+    </>
   );
 }
 
