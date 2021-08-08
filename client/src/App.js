@@ -1,8 +1,9 @@
 import { Switch, Route } from 'react-router-dom';
-import { BooksList } from './BooksList';
-import { CreateBook } from './CreateBook';
+import BooksList from './BooksList';
+import CreateBook from './CreateBook';
 import { NavBar } from './layout';
-import { UpdateBook } from './UpdateBook';
+import UpdateBook from './UpdateBook';
+
 function App() {
   return (
     <>

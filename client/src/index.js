@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import preset from '@rebass/preset';
+import reportWebVitals from './reportWebVitals';
+import App from './App';
 
 const queryClient = new QueryClient();
 

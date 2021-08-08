@@ -1,3 +1,3 @@
-export const BooksList = () => {
-  return <div>BooksList</div>;
-};
+const BooksList = () => <div>BooksList</div>;
+
+export default BooksList;

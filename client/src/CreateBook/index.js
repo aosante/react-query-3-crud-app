@@ -1,1 +1,1 @@
-export * from './CreateBook';
+export { default } from './CreateBook';

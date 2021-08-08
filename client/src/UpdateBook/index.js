@@ -1,1 +1,1 @@
-export * from './UpdateBook';
+export { default } from './UpdateBook';
