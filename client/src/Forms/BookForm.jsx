@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { Box, Button } from 'rebass/styled-components';
 import { Label, Input } from '@rebass/forms/styled-components';
 import { useForm } from 'react-hook-form';
@@ -14,11 +15,11 @@ const BookForm = ({ defaultValues, onFormSubmit, isLoading }) => {
     <form onSubmit={onSubmit}>
       <Box sx={{ marginBottom: 3 }}>
         <Label htmlFor="title">Title</Label>
-        <Input ref={register} id="title" name="title" type="text" />
+        <Input {...register('title')} type="text" />
       </Box>
       <Box sx={{ marginBottom: 3 }}>
         <Label htmlFor="author">Author</Label>
-        <Input ref={register} id="author" name="author" type="text" />
+        <Input {...register('author')} type="text" />
       </Box>
       <Button variant="primary" mr={2}>
         {isLoading ? (
