@@ -3,7 +3,8 @@ import { Flex } from 'rebass/styled-components';
 import Loader from 'react-loader-spinner';
 
 import { Container } from '../layout';
-import getAllBooks from '../api';
+import { getAllBooks } from '../api';
+import BookItem from './BookItem';
 
 const BooksList = () => {
   const { data, error, isLoading, isError } = useQuery('books', getAllBooks);
@@ -26,9 +27,7 @@ const BooksList = () => {
     <Container>
       <Flex flexDirection="column" alignItems="center">
         {data.map(({ author, title, id }) => (
-          <div key={id}>
-            {author} - {title}
-          </div>
+          <BookItem author={author} title={title} key={id} id={id} />
         ))}
       </Flex>
     </Container>
