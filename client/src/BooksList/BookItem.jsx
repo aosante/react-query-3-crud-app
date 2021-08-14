@@ -20,11 +20,16 @@ const BookItem = ({ id, title, author }) => {
 
   return (
     <Flex key={id} p={3} width="100%" alignItems="center">
-      <Link component={StyledLink} to={`/update-book/${id}`} mr="auto">
+      <Link
+        component={StyledLink}
+        to={`/update-book/${id}`}
+        mr="auto"
+        variant="nav"
+      >
         {title}
       </Link>
       <Text>{author}</Text>
-      <Button onClick={remove} ml="5">
+      <Button onClick={remove} ml="5" variant="secondary">
         {isLoading ? (
           <Loader type="ThreeDots" color="#fff" height={10} />
         ) : (

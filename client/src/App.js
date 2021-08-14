@@ -11,7 +11,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={BooksList} />
         <Route path="create-book" component={CreateBook} />
-        <Route path="update-book" component={UpdateBook} />
+        <Route path="update-book/:id" component={UpdateBook} />
       </Switch>
     </>
   );
