@@ -15,6 +15,7 @@ const BookItem = ({ id, title, author }) => {
 
   const remove = async () => {
     await mutateAsync(id);
+    // cleans the cache and forces the BooksList to refetch data
     queryClient.invalidateQueries('books');
   };
 
