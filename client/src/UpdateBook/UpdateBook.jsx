@@ -1,19 +1,16 @@
-import { useQuery, useMutation } from 'react-query';
 import { Box, Heading, Flex } from 'rebass/styled-components';
 import { useParams, useHistory } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
-import { getBook, updateBook } from '../api';
 import { Container } from '../layout';
 import BookForm from '../Forms';
+import useFetchBook from './useFetchBook';
+import useUpdateBook from './useUpdateBook';
 
 const UpdateBook = () => {
   const { id } = useParams();
   const history = useHistory();
-  const { data, error, isLoading, isError } = useQuery(
-    ['book', { id }],
-    getBook
-  );
-  const { mutateAsync, isLoading: isMutating } = useMutation(updateBook);
+  const { data, error, isLoading, isError } = useFetchBook(id);
+  const { mutateAsync, isLoading: isMutating } = useUpdateBook();
 
   const onFormSubmit = async (formData) => {
     await mutateAsync({ ...formData, id });
