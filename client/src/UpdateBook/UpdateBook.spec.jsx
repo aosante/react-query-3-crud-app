@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import { Route } from 'react-router-dom';
+import { fireEvent, waitFor } from '@testing-library/react';
 
 import UpdateBook from './UpdateBook';
 import BookForm from '../Forms/BookForm';
@@ -94,7 +95,33 @@ describe('Update Book', () => {
     });
 
     describe('on book form submit', () => {
-      it.todo('updates the book data and navigates to the root page');
+      it('updates the book data and navigates to the root page', async () => {
+        BookForm.mockImplementation(({ onFormSubmit }) => (
+          <button type="submit" onClick={() => onFormSubmit({ foo: 'bar' })}>
+            Submit
+          </button>
+        ));
+        const mutateAsync = jest.fn();
+
+        useUpdateBook.mockImplementation(() => ({ mutateAsync }));
+
+        const { getByText, history } = renderWithRouter(
+          () => (
+            <Route path="/:id">
+              <UpdateBook />
+            </Route>
+          ),
+          '/test-book-id'
+        );
+        fireEvent.click(getByText('Submit'));
+        expect(mutateAsync).toHaveBeenCalledWith({
+          foo: 'bar',
+          id: 'test-book-id',
+        });
+
+        await waitFor(mutateAsync);
+        expect(history.location.pathname).toEqual('/');
+      });
     });
   });
 });
