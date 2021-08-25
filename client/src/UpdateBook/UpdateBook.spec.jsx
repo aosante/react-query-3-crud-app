@@ -2,16 +2,19 @@
 import { Route } from 'react-router-dom';
 
 import UpdateBook from './UpdateBook';
+import BookForm from '../Forms/BookForm';
 import useFetchBook from './useFetchBook';
 import useUpdateBook from './useUpdateBook';
 
 jest.mock('./useFetchBook');
 jest.mock('./useUpdateBook');
+jest.mock('../Forms/BookForm');
 
 describe('Update Book', () => {
   beforeEach(() => {
     useFetchBook.mockImplementation(() => ({}));
     useUpdateBook.mockImplementation(() => ({}));
+    BookForm.mockImplementation(() => null);
   });
 
   it('fetches the book data for the given id', () => {
@@ -48,11 +51,47 @@ describe('Update Book', () => {
   });
 
   describe('with an error', () => {
-    it.todo('renders an error message');
+    it('renders an error message', () => {
+      useFetchBook.mockImplementation(() => ({
+        isError: true,
+        error: { message: 'Something went wrong' },
+      }));
+
+      const { container } = renderWithRouter(
+        () => (
+          <Route path="/:id">
+            <UpdateBook />
+          </Route>
+        ),
+        '/test-book-id'
+      );
+
+      expect(container.innerHTML).toMatch('Error: Something went wrong');
+    });
   });
 
   describe('with data', () => {
-    it.todo('renders the  updated book title and the book form');
+    it('renders the  updated book title and the book form', () => {
+      useFetchBook.mockImplementation(() => ({
+        data: { foo: 'bar' },
+      }));
+
+      const { container } = renderWithRouter(
+        () => (
+          <Route path="/:id">
+            <UpdateBook />
+          </Route>
+        ),
+        '/test-book-id'
+      );
+      expect(container.innerHTML).toMatch('Update Book');
+      expect(BookForm).toBeCalledWith(
+        expect.objectContaining({
+          defaultValues: { foo: 'bar' },
+        }),
+        {}
+      );
+    });
 
     describe('on book form submit', () => {
       it.todo('updates the book data and navigates to the root page');
